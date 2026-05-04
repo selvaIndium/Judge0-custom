@@ -37,12 +37,43 @@ RUN sed -i 's|http://deb.debian.org/debian|http://archive.debian.org/debian|g' /
 
 COPY patches/isolate-cgroup-v2.patch /tmp/isolate-cgroup-v2.patch
 
+#build essentials
+
 RUN git clone --branch v${ISOLATE_VERSION} --depth=1 https://github.com/ioi/isolate.git /tmp/isolate && \
     cd /tmp/isolate && \
     patch -p1 < /tmp/isolate-cgroup-v2.patch && \
     make install PREFIX=/usr/local && \
     rm -rf /tmp/isolate && \
     rm -f /tmp/isolate-cgroup-v2.patch
+
+# ============================================================
+# Install all custom requirements (Python, Node, React)
+# ============================================================
+
+# Copy the entire requirements folder
+COPY requirements /tmp/requirements
+WORKDIR /tmp/requirements
+
+# 1. Python dependencies (FastAPI, Django, Data Science)
+RUN bash python/install-python-deps.sh
+
+# 2. Node.js 18 + npm
+RUN bash node/install-node.sh
+
+# 3. Global React testing packages (Jest, Testing Library, Babel)
+RUN bash node/install-react-global.sh
+
+# 4. Copy Babel config to a permanent location
+RUN cp babel/babel.config.js /usr/local/lib/babel.config.js
+
+# 5. Set environment variables for Node and Babel
+ENV NODE_PATH="/usr/local/lib/node_modules"
+ENV BABEL_CONFIG_PATH="/usr/local/lib/babel.config.js"
+
+# Clean up
+RUN rm -rf /tmp/requirements
+WORKDIR /api
+
 
 EXPOSE 2358
 
