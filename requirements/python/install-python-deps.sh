@@ -11,9 +11,12 @@ pip3 install --upgrade pip setuptools wheel
 
 echo "Installing Python packages..."
 pip3 install --no-cache-dir \
-    fastapi \
+    fastapi[all] \
     uvicorn \
     requests \
+    pytest \
+    httpx \
+
     #django==6.0.5 \
     #numpy==2.4.4 \
     #pandas==3.0.2 \
