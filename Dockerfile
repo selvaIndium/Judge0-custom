@@ -47,7 +47,7 @@ RUN git clone --branch v${ISOLATE_VERSION} --depth=1 https://github.com/ioi/isol
     rm -f /tmp/isolate-cgroup-v2.patch
 
 # ============================================================
-# Install all custom requirements (Python, Node, React)
+# Install all custom requirements (Python, Node, React, Angular)
 # ============================================================
 
 # Copy the entire requirements folder
@@ -63,10 +63,13 @@ RUN bash node/install-node.sh
 # 3. Global React testing packages (Jest, Testing Library, Babel)
 RUN bash node/install-react-global.sh
 
-# 4. Copy Babel config to a permanent location
+# 4. Global Angular CLI and testing packages (Jasmine, Karma, TypeScript)
+RUN bash angular/install-angular-global.sh
+
+# 5. Copy Babel config to a permanent location
 RUN cp babel/babel.config.js /usr/local/lib/babel.config.js
 
-# 5. Set environment variables for Node and Babel
+# 6. Set environment variables for Node, Babel, and Angular
 ENV NODE_PATH="/usr/local/lib/node_modules"
 ENV BABEL_CONFIG_PATH="/usr/local/lib/babel.config.js"
 
@@ -75,7 +78,7 @@ RUN rm -rf /tmp/requirements
 WORKDIR /api
 
 
-EXPOSE 2358
+EXPOSE 2359
 
 WORKDIR /api
 
