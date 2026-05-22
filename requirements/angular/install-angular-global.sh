@@ -12,6 +12,8 @@ npm install --global \
     @angular/common \
     @angular/router \
     @angular/forms \
+    @angular/compiler-cli \
+    @angular-devkit/build-angular \
     typescript \
     rxjs \
     zone.js \
@@ -20,7 +22,11 @@ npm install --global \
     karma-chrome-launcher \
     karma-jasmine \
     karma-jasmine-html-reporter \
-    @types/jasmine
+    @types/jasmine \
+    @types/jest \
+    ts-jest \
+    jest-preset-angular \
+    jest-environment-jsdom
 
 npm cache clean --force
 

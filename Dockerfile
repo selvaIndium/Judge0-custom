@@ -70,7 +70,7 @@ RUN bash angular/install-angular-global.sh
 RUN cp babel/babel.config.js /usr/local/lib/babel.config.js
 
 # 6. Set environment variables for Node, Babel, and Angular
-ENV NODE_PATH="/usr/local/lib/node_modules"
+ENV NODE_PATH="/usr/lib/node_modules"
 ENV BABEL_CONFIG_PATH="/usr/local/lib/babel.config.js"
 
 # Clean up

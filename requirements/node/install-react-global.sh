@@ -9,6 +9,7 @@ npm install --global \
     jest-environment-jsdom \
     @testing-library/react \
     @testing-library/jest-dom \
+    @types/jest \
     react \
     react-dom \
     @babel/core \
