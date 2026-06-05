@@ -16,6 +16,7 @@ pip3 install --no-cache-dir \
     requests \
     pytest \
     httpx \
+    "mongomock<4.0" \
 
     #django==6.0.5 \
     #numpy==2.4.4 \
