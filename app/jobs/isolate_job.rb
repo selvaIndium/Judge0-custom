@@ -77,7 +77,7 @@ class IsolateJob < ApplicationJob
   end
 
   def initialize_workdir
-    @box_id = submission.id%2147483647
+    @box_id = submission.id%1000
     allow_cgroups = self.class.unified_cgroup_supported?
     requires_cgroups = (!submission.enable_per_process_and_thread_time_limit || !submission.enable_per_process_and_thread_memory_limit)
     @cgroups = (allow_cgroups && requires_cgroups) ? "--cg" : ""
